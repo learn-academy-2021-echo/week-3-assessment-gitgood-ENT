@@ -74,8 +74,23 @@ describe("sortOdds", () => {
     })
 })
 
+// RED
 // b) Create the function that makes the test pass.
 
+// Declare function sortOdds that takes in an array and filters --using .filter-- through the values returning only the odd ones, and then sorts them using .sort
+// const sortOdds = (array) => {
+//     // assign a variable to hold the filtered array using typeof to return numbers only
+//     let numberArray = array.filter(value => typeof value === 'number')
+//     // return the number array filtered again to only have odd numbers, including negatives, and then sorted using the built in function to return the lowest numbers first
+//     return numberArray.filter(value => value % 2 !== 0).sort((a, b) => a - b)
+// }
+// Green
+//Refactor idea is to filter twice in one or use && to pass in two requirements to the filter
+
+const sortOdds = (array) => {
+    return array.filter(value => typeof value === 'number' && value % 2 !== 0).sort((a, b) => a - b)
+}
+// Refactor returned a green, Refactor successful
 
 // --------------------3) Create a function that takes in an array and returns an array of the accumulating sum. An empty array should return an empty array.
 
@@ -90,5 +105,31 @@ var numbersToAdd2 = [0, 7, -8, 12]
 var numbersToAdd3 = []
 // Expected output: []
 
+// I totally understand the importance of pseudocode, I do however also see how the test that we use here is in itself pseudocode. i.e. ====
+// ===> I describe my function that I call accumulator, 
+//          it "takes in an array and returns an array  of the same length that with the accumulating sum of the numbers in it so far"
+//              I expect that when I pass in an array of numbers, that the output is going toEqual this array
+// I'm not trying to bash on pseudocode, I find it very useful when I am doing complex, multi step things that call multiple functions and data pieces, or am using new types of functions, syntaxes, or things that I found difficult to use when first learning them.
+// Sincerely, a genuinely curious and streamline oriented student who wants to know the why of everything, including the reason why we do things that I don't understand why we do. I am sure there is a good reason, like, muscle memory and creating a solid foundation for learning.
+describe("accumulator", () => {
+    it("takes in an array and returns an array  of the same length that with the accumulating sum of the numbers in it so far", () => {
+        expect(accumulator(numbersToAdd1)).toEqual([2, 6, 51, 60])
+        expect(accumulator(numbersToAdd2)).toEqual([0, 7, -1, 11])
+    })
+})
+// Red
 
 // b) Create the function that makes the test pass.
+
+//declare function accumulator that takes in an array and returns an array  of the same length that with the accumulating sum of the numbers in it so far
+const accumulator = (array) => {
+    // Declare a variable to store the new array, and include the first number from the input array since they will always be the same.
+    let addedNumbers = [array[0]]
+    // create a for loop that pushes the new sum into the output array, with index starting at 1
+    for (let j = 1; j < array.length; j++) {
+        // add the number at j index to the current sum of the input array numbers and push it into addedNumbers array 
+        addedNumbers.push(addedNumbers[j - 1] + array[j])        
+    }
+    return addedNumbers
+}
+// Green
